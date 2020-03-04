@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>BACKEND TUTORIAL</title>
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Lista delle cose da fare</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Cosa</th>
+                        <th scope="col">Data</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <form action="/" method="POST">
+                <input type="text" name="cosa" id="cosaId">
+                <input type="submit" value="Aggiungi" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+{% endblock %}
