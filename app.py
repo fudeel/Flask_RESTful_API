@@ -26,7 +26,7 @@ class Todo(db.Model):
 def index():
     if request.method == 'POST':
         content = request.form['cosa']
-        item = Todo(content=content)
+        item = Todo(content=content, date_created=datetime.utcnow())
 
         try:
             db.session.add(item)
@@ -39,6 +39,17 @@ def index():
         itemList = Todo.query.order_by(Todo.date_created).all()
         return render_template('index.html', itemList=itemList)
 
+
+@app.route("/delete/<int:id>")
+def deleteItem(id):
+    itemToDelete = Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(itemToDelete)
+        db.session.commit()
+        return redirect("/")
+    except Exception as e:
+        return "There was an error on deleting ", e
 
 if __name__ == '__main__':
     app.run(debug=True)

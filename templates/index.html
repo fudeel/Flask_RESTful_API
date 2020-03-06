@@ -25,11 +25,11 @@
                         <tr>
                             <th scope="row">{{ item.id }}</th>
                             <td>{{ item.content }}</td>
-                            <td>{{ item.datetime }}</td>
+                            <td>{{ item.date_created }}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                        <a class="btn btn-sm btn-danger" href="/delete/{{ item.id }}">Delete</a>
                                     </div>
                                     <div class="col-lg-6">
                                         <button class="btn btn-sm btn-info">Edit</button>
