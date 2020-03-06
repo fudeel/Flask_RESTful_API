@@ -5,7 +5,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 # database location
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:PASSWORD@localhost:5432/flaskdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:losangeles@localhost:5432/flaskdb'
 
 # database init
 db = SQLAlchemy(app)
@@ -25,7 +25,7 @@ class Todo(db.Model):
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        content = request.form['cosa']
+        content = request.form['itemToAdd']
         item = Todo(content=content, date_created=datetime.utcnow())
 
         try:
@@ -50,6 +50,24 @@ def deleteItem(id):
         return redirect("/")
     except Exception as e:
         return "There was an error on deleting ", e
+
+
+@app.route("/update/<int:id>", methods=['POST', 'GET'])
+def updateItem(id):
+    selected = Todo.query.get_or_404(id)
+
+    if request.method == 'POST':
+
+        selected.content = request.form['itemToUpdate']
+
+        try:
+            db.session.commit()
+            return redirect("/")
+        except Exception as e:
+            return "There was an error updating the item", e
+    else:
+        return render_template('update.html', selected=selected)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
